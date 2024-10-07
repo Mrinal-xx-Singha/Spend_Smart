@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
-  DialogClose
+  DialogClose,
 } from "@/components/ui/dialog";
 import EmojiPicker from "emoji-picker-react";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,8 @@ import { Budgets } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 
-const CreateBudget = () => {
+// passing refresh data as prop
+const CreateBudget = ({ refreshData }) => {
   const [emojiIcon, setEmojiIcon] = useState("😀");
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
 
@@ -42,15 +43,15 @@ const CreateBudget = () => {
         icon: emojiIcon, // The emoji chosen by the user to represent the budget
       })
       .returning({ insertedId: Budgets.id }); // Return the ID of the newly inserted budget record
-  
+
     // Check if the insert operation was successful
     if (result) {
       // If successful, show a toast notification to the user
+      refreshData();
+      // calling refreshData with eh creation of budget
       toast("New Budget Created 🎉");
     }
   };
-  ;
-
   return (
     <div>
       {/* Dialog component */}
@@ -76,7 +77,7 @@ const CreateBudget = () => {
                 {emojiIcon}
               </Button>
               {openEmojiPicker && (
-                <div className="absolute">
+                <div className="absolute z-20">
                   <EmojiPicker
                     onEmojiClick={(e) => {
                       setEmojiIcon(e.emoji);
@@ -104,7 +105,7 @@ const CreateBudget = () => {
           </DialogHeader>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
-            <Button
+              <Button
                 disabled={!(name && amount > 0)}
                 className="mt-5 w-full"
                 onClick={onCreateBudget} // Corrected invocation

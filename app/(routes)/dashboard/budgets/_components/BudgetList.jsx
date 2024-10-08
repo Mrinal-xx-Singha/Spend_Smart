@@ -33,7 +33,7 @@ const BudgetList = ({ refreshData }) => {
         .select({
           ...getTableColumns(Budgets),
 
-           // Calculate the total spend from the Expenses table for each budget
+          // Calculate the total spend from the Expenses table for each budget
           totalSpend: sql`SUM(${Expenses.amount})`.mapWith(Number),
           // Count the total number of expenses related to each budget
           totalCount: sql`COUNT(${Expenses.id})`.mapWith(Number),
@@ -44,7 +44,7 @@ const BudgetList = ({ refreshData }) => {
 
         .where(eq(Budgets.createdBy, user.primaryEmailAddress?.emailAddress))
         // Group the results by Budgets.id so that totals are calculated per budget
-        .groupBy(Budgets.id)
+        .groupBy(Budgets.id);
 
       // Set the fetched data into state
       setBudgetList(result);

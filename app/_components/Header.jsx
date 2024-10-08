@@ -12,7 +12,9 @@ const Header = () => {
         <UserButton />
       ) : (
         <Link href={"/sign-in"}>
-        <Button className="bg-primary text-white rounded-md">Get Started</Button>
+          <Button className="bg-primary text-white rounded-md">
+            Get Started
+          </Button>
         </Link>
       )}
     </div>

@@ -7,12 +7,31 @@ import { useUser } from "@clerk/nextjs"; // Get user data with Clerk
 import BudgetItem from "../../budgets/_components/BudgetItem";
 import AddExpense from "../_components/AddExpense";
 import ExpenseListTable from "../_components/ExpenseListTable";
+import { Button } from "@/components/ui/button";
+import { PenBoxIcon, Trash } from "lucide-react";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import EditBudget from "../_components/EditBudget";
 
 const ExpenseList = ({ params }) => {
   const [budgetList, setBudgetList] = useState([]); // State to store budget data
   const [loading, setLoading] = useState(false); // State for loading indicator
   const [error, setError] = useState(null); // State to store error message
   const { user } = useUser(); // Get the current logged-in user
+
+  const route = useRouter();
 
   const [expensesLists, setExpensesLists] = useState([]);
   // Fetch budget info when component mounts or when user/params.id changes
@@ -59,9 +78,62 @@ const ExpenseList = ({ params }) => {
       .orderBy(desc(Expenses.id));
     setExpensesLists(result);
   };
+
+  /**
+   * Used to Delete Budget
+   *
+   */
+  const deleteBudget = async () => {
+    const deleteExpenseResult = await db
+      .delete(Expenses)
+      .where(eq(Expenses.budgetId, params.id))
+      .returning();
+    if (deleteExpenseResult) {
+      const res = await db
+        .delete(Budgets)
+        .where(eq(Budgets.id, params.id))
+        .returning();
+    }
+    toast("Budget Deleted");
+    route.replace("/dashboard/budgets");
+  };
   return (
     <div className="p-10">
-      <h2 className="text-2xl font-bold">My Expenses</h2>
+      <h2 className="text-2xl font-bold flex justify-between items-center mb-3">
+        My Expenses
+        {/* Button to edit expenses */}
+        <div className="flex gap-2 items-center">
+          {/* Edit budget component */}
+        <EditBudget 
+        budgetList={budgetList}
+        refreshData={()=>getBudgetInfo()}
+        />
+        {/* option to confirm delete usign shad cn alert dialog */}
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button className="flex gap-2 bg-red-500" size="lg">
+              <Trash className="text-white" />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="bg-white text-black">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                current budget along with your expenses from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={() => deleteBudget()}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+        </div>
+      </h2>
+
       {loading ? (
         <div className="h-[150px] w-full bg-slate-200 rounded-lg animate-pulse"></div> // Skeleton loader
       ) : error ? (
@@ -82,9 +154,9 @@ const ExpenseList = ({ params }) => {
       )}
       <div className="mt-4">
         <h2 className="font-bold text-lg ">Latest Expenses</h2>
-        <ExpenseListTable 
-        expensesLists={expensesLists}
-        refreshData={()=>getBudgetInfo()}
+        <ExpenseListTable
+          expensesLists={expensesLists}
+          refreshData={() => getBudgetInfo()}
         />
       </div>
     </div>

@@ -10,7 +10,7 @@ const CardInfo = ({ budgetList = [] }) => {
    * Calculate total budget, total spend, and budget count.
    */
   const calculateCardInfo = () => {
-    console.log(budgetList);
+    
 
     if (budgetList.length > 0) {
       // Calculate total budget

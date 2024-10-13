@@ -1,6 +1,7 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import CardInfo from "./_components/CardInfo";
 import { desc, sql } from "drizzle-orm";
 import { db } from "@/utils/dbConfig";
@@ -9,6 +10,7 @@ import { eq } from "drizzle-orm";
 import BarChartDashBoard from "./_components/BarChartDashBoard";
 import BudgetItem from "./budgets/_components/BudgetItem";
 import ExpenseListTable from "./expenses/_components/ExpenseListTable";
+import { Plus } from "lucide-react";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -72,9 +74,21 @@ const Dashboard = () => {
       .orderBy(desc(Expenses.id));
     setExpensesList(res);
   };
+
   return (
     <div className="p-8">
-      <h2 className="font-bold text-3xl">Hi, {user?.fullName} 👋</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="font-bold text-xl md:text-2xl lg:text-3xl">Hi, {user?.fullName} 👋</h2>
+        {/* Link to Budget Section */}
+        <Link href="/dashboard/budgets"
+        >
+          <button className="bg-primary text-white px-4 py-2 md:px-6 md:py-3 rounded-lg w-full md:w-auto text-sm md:text-base
+          flex justify-center items-center gap-2
+          ">
+          <Plus /> Create Budgets
+          </button>
+        </Link>
+      </div>
       <p className="text-gray-500 mt-2">
         Insights about your money, expenses, and budget
       </p>

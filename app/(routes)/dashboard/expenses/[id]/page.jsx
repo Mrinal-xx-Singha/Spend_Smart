@@ -8,7 +8,7 @@ import BudgetItem from "../../budgets/_components/BudgetItem";
 import AddExpense from "../_components/AddExpense";
 import ExpenseListTable from "../_components/ExpenseListTable";
 import { Button } from "@/components/ui/button";
-import { PenBoxIcon, Trash } from "lucide-react";
+import { ArrowLeft, PenBoxIcon, Trash } from "lucide-react";
 
 import {
   AlertDialog,
@@ -24,6 +24,7 @@ import {
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import EditBudget from "../_components/EditBudget";
+import Link from "next/link";
 
 const ExpenseList = ({ params }) => {
   const [budgetList, setBudgetList] = useState([]); // State to store budget data
@@ -99,16 +100,20 @@ const ExpenseList = ({ params }) => {
   };
   return (
     <div className="p-10">
-      <h2 className="text-2xl font-bold flex justify-between items-center mb-3">
+    <div className="flex justify-between gap-2 px-4 items-center mb-3">
+      <h2 className="text-2xl font-bold flex items-center gap-2">
+        {/* Arrow icon and text on the same line */}
+        <Link href={"/dashboard/budgets"} className="flex items-center text-3xl font-bold">
+          <ArrowLeft className="mr-2" />
+        </Link>
         My Expenses
-        {/* Button to edit expenses */}
-        <div className="flex gap-2 items-center">
-          {/* Edit budget component */}
-        <EditBudget 
-        budgetList={budgetList}
-        refreshData={()=>getBudgetInfo()}
-        />
-        {/* option to confirm delete usign shad cn alert dialog */}
+      </h2>
+  
+      {/* Button to edit expenses */}
+      <div className="flex gap-2 items-center">
+        {/* Edit budget component */}
+        <EditBudget budgetList={budgetList} refreshData={() => getBudgetInfo()} />
+        {/* option to confirm delete using ShadCN alert dialog */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button className="flex gap-2 bg-red-500" size="lg">
@@ -131,35 +136,37 @@ const ExpenseList = ({ params }) => {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-        </div>
-      </h2>
-
-      {loading ? (
-        <div className="h-[150px] w-full bg-slate-200 rounded-lg animate-pulse"></div> // Skeleton loader
-      ) : error ? (
-        <p className="text-red-500">{error}</p> // Display error message
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {/* Render a BudgetItem for each budget */}
-          {budgetList.map((budget, index) => (
-            <BudgetItem key={index} budget={budget} />
-          ))}
-          {/* Render the AddExpense component and pass required props */}
-          <AddExpense
-            refreshData={getBudgetInfo} // Pass the function to refresh the budget list
-            budgetId={params.id} // Pass the current budget ID
-            user={user} // Pass the logged-in user
-          />
-        </div>
-      )}
-      <div className="mt-4">
-        <h2 className="font-bold text-lg ">Latest Expenses</h2>
-        <ExpenseListTable
-          expensesLists={expensesLists}
-          refreshData={() => getBudgetInfo()}
-        />
       </div>
     </div>
+  
+    {loading ? (
+      <div className="h-[150px] w-full bg-slate-200 rounded-lg animate-pulse"></div> // Skeleton loader
+    ) : error ? (
+      <p className="text-red-500">{error}</p> // Display error message
+    ) : (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Render a BudgetItem for each budget */}
+        {budgetList.map((budget, index) => (
+          <BudgetItem key={index} budget={budget} />
+        ))}
+        {/* Render the AddExpense component and pass required props */}
+        <AddExpense
+          refreshData={getBudgetInfo} // Pass the function to refresh the budget list
+          budgetId={params.id} // Pass the current budget ID
+          user={user} // Pass the logged-in user
+        />
+      </div>
+    )}
+  
+    <div className="mt-4">
+      <h2 className="font-bold text-lg">Latest Expenses</h2>
+      <ExpenseListTable
+        expensesLists={expensesLists}
+        refreshData={() => getBudgetInfo()}
+      />
+    </div>
+  </div>
+  
   );
 };
 

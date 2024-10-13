@@ -27,8 +27,6 @@ function DashboardLayout({ children }) {
           if (result.length === 0) {
             router.replace("/dashboard/budgets");
           }
-
-          console.log(result);
         } catch (error) {
           console.error("Error fetching budgets:", error);
         }
@@ -42,6 +40,7 @@ function DashboardLayout({ children }) {
     <div>
       <div className="fixed md:w-64 hidden md:block">
         <SideNav />
+      
       </div>
       <div className="md:ml-64">
         <DashboardHeader />

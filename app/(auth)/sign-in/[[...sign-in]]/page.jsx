@@ -26,14 +26,15 @@ export default function Page() {
                 />
               </svg>
             </a>
-
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Welcome to Squid 🦑
-            </h2>
+            <div className="flex items-center justify-center">
+              <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+                Welcome to <span className="text-primary">Spend</span> Smart
+              </h2>
+              <img src="/logo.svg" />
+            </div>
 
             <p className="mt-4 leading-relaxed text-white/90">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-              nam dolorum aliquam, quibusdam aperiam voluptatum.
+              Spend your money wisely keep track of your expenditure and make your financial decisions wisefully with the help of spend smart
             </p>
           </div>
         </section>

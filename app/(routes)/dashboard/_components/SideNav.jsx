@@ -25,18 +25,6 @@ const SideNav = () => {
       icon: PiggyBank,
       path: "/dashboard/budgets",
     },
-    {
-      id: 3,
-      name: "Expenses",
-      icon: ReceiptText,
-      path: "/dashboard/expenses",
-    },
-    {
-      id: 4,
-      name: "Upgrade",
-      icon: ShieldCheckIcon,
-      path: "/dashboard/upgrade",
-    },
   ];
   //! next hook
   const path = usePathname();
@@ -49,16 +37,13 @@ const SideNav = () => {
       <Image src={"/logo.svg"} alt="logo" height={100} width={160} />
       <div className="mt-5">
         {menuList.map((menu, index) => (
-          <Link href={menu.path}
-          key={index}
-          >
+          <Link href={menu.path} key={index}>
             <h2
               className={`flex gap-2 items-center text-gray-500 font-medium
                  p-5 mb-2
           cursor-pointer rounded-md hover:text-primary hover:bg-blue-100
           ${path == menu.path && "text-primary bg-blue-100 "}
           `}
-             
             >
               <menu.icon />
               {menu.name}

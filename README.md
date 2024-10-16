@@ -9,6 +9,18 @@
 
 SpendSmart is more than just a typical expense tracker—it’s a comprehensive tool designed to empower users to take full control of their finances. It simplifies budget management, allowing users to easily create and monitor budgets in line with their financial goals. One of its standout features is the ability to track expenses through visually engaging and dynamic charts, thanks to **Recharts**, offering real-time insights into spending patterns. SpendSmart prioritizes security with **Clerk** authentication, ensuring that login and logout processes are seamless and user data remains protected.The app delivers a smooth and fast user experience, built with **Next.js** and styled using **Tailwind CSS**, making the interface highly responsive and user-friendly. Additionally, the integration of **ShadCN** ensures a modern, accessible, and visually appealing UI, enhancing both functionality and aesthetics. By allowing users to effortlessly track expenses and visualize their data, SpendSmart is the perfect solution for anyone looking to manage their personal finances effectively and securely.
 
+## Screenshots
+
+![Screenshot (307)](https://github.com/user-attachments/assets/671b75ba-4d96-44dd-9a88-1e7415d5cafb)
+![Screenshot (306)](https://github.com/user-attachments/assets/357ce52f-2315-4cdb-88ea-bf2177fa7ee8)
+![Screenshot (305)](https://github.com/user-attachments/assets/fe789d76-7347-4fc1-ae42-8ed407b0cada)
+![Screenshot (304)](https://github.com/user-attachments/assets/9d59287a-83a6-4d9c-b569-bb7b33b518c8)
+![Screenshot (303)](https://github.com/user-attachments/assets/a21ffb3d-ff1d-4e95-a1db-0e6995307944)
+![Screenshot (302)](https://github.com/user-attachments/assets/fcd85df9-81ea-4cfa-a42f-b5a14b07ed8b)
+![Screenshot (301)](https://github.com/user-attachments/assets/2ee29278-6c77-498f-b931-52defd55c41f)
+![Screenshot (300)](https://github.com/user-attachments/assets/f6410233-7f1b-4856-9b50-60a5329453ed)
+
+
 
 ### Key Features 💰:
 - ➕ **Create and Manage Budgets:** Set up custom budgets and track how your expenses align with your financial goals.

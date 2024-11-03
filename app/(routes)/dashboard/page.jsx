@@ -36,6 +36,7 @@ const Dashboard = () => {
         .select({
           id: Budgets.id,
           name: Budgets.name,
+          icon: Budgets.icon,
           createdBy: Budgets.createdBy,
           amount: Budgets.amount,
           totalSpend: sql`SUM(${Expenses.amount})`.mapWith(Number),

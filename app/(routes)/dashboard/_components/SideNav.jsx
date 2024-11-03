@@ -25,6 +25,18 @@ const SideNav = () => {
       icon: PiggyBank,
       path: "/dashboard/budgets",
     },
+    {
+      id: 3,
+      name: "Expenses",
+      icon: ReceiptText,
+      path: "/dashboard/expenses",
+    },
+    {
+      id: 4,
+      name: "Upgrade",
+      icon: ShieldCheckIcon,
+      path: "/dashboard/upgrades",
+    },
   ];
   //! next hook
   const path = usePathname();

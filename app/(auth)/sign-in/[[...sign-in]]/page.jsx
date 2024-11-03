@@ -6,8 +6,8 @@ export default function Page() {
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img
-            alt=""
-            src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            alt="hero-banner"
+            src="https://images.unsplash.com/photo-1565515636369-57f6e9f5fe79?q=80&w=1405&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
           />
 
@@ -34,7 +34,8 @@ export default function Page() {
             </div>
 
             <p className="mt-4 leading-relaxed text-white/90">
-              Spend your money wisely keep track of your expenditure and make your financial decisions wisefully with the help of spend smart
+              Spend your money wisely keep track of your expenditure and make
+              your financial decisions wisefully with the help of spend smart
             </p>
           </div>
         </section>
@@ -61,15 +62,18 @@ export default function Page() {
               </a>
 
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                Welcome to Squid 🦑
+                Welcome to Spend Smart 
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+                Spend your money wisely keep track of your expenditure and make
+                your financial decisions wisefully with the help of spend smart
               </p>
             </div>
+            <div className="mt-2">
             <SignIn />
+
+            </div>
           </div>
         </main>
       </div>
